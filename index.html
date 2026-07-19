@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tsuzuru Iroha | Illustrator Portfolio</title>
+
+<!-- ================================================
+     Google Fonts 読み込み
+     ・Noto Sans JP  : 日本語本文用（細めのウェイトで繊細な印象に）
+     ・Cormorant Garamond : 英字見出し用（線が細く優雅なセリフ体）
+================================================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<!-- 外部CSSファイルの読み込み -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================
+       かすかに動く幾何学模様の背景（装飾用・全ページ共通）
+       クリック等の操作を妨げないよう pointer-events:none
+  ============================================= -->
+  <div class="bg-pattern" aria-hidden="true"></div>
+
+  <!-- ============================================
+       ヘッダー：スクロールしても常に上部に固定される
+  ============================================= -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="#top" class="header__logo">Tsuzuru<span class="header__logo-dot">.</span>Iroha</a>
+
+      <nav class="header__nav">
+        <a href="#works" class="header__nav-link">Works</a>
+        <a href="#about" class="header__nav-link">About</a>
+        <a href="#contact" class="header__nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================
+         メインビジュアル：左にキャッチコピー／右に大きなイラスト
+    ============================================= -->
+    <section id="top" class="hero">
+
+      <!-- 左カラム：キャッチコピー（コンテナ幅に収まる） -->
+      <div class="hero__text-col">
+        <div class="hero__text">
+          <p class="hero__eyebrow">Illustrator</p>
+          <h1 class="hero__title">
+            生意気で、愛おしい、<br>
+            極彩色の彼ら。
+          </h1>
+          <p class="hero__lead">
+            極彩色でフチ取られる<br class="hero__lead-br">
+            彼らの日常の一瞬を描いています。
+          </p>
+          <a href="#works" class="hero__cta">View Works ↓</a>
+        </div>
+      </div>
+
+      <!-- 右カラム：メインイラスト（ヒーローエリアの右側いっぱいに表示／画面端まで塗り足す）
+           ※ここに実際のイラスト画像パスを差し込んでください（現在はダミー画像）
+           【推奨画像サイズ】縦長 1200×1600px 以上（縦横比おおよそ 3:4）を推奨します。
+           object-fit: cover で余白なく敷き詰めるため、
+           - 横幅：PC〜大画面でも粗くならないよう 1200px 以上
+           - 縦横比：ヒーローエリアは画面の高さいっぱい（min-height:100vh）を占めるため、
+             正方形よりも縦長の構図の方がトリミングによる欠けが少なくなります
+           - 見せたい部分（顔・主役の被写体など）は画像の中央〜やや上に配置してください
+             （左右上下は表示エリアに応じてトリミングされます）
+           下からふわっと浮き上がるアニメーションつき -->
+      <div class="hero__visual">
+        <img
+          src="images/main.jpg"
+          alt="メインイラスト"
+          class="hero__illustration">
+      </div>
+
+      <!-- スクロールを促す矢印 -->
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <span class="hero__scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ============================================
+         Works：作品一覧（3列グリッド／スマホは1列）
+    ============================================= -->
+    <section id="works" class="works">
+      <div class="section-inner">
+        <h2 class="section-title"><span class="section-title__en">Works</span><span class="section-title__jp">作品</span></h2>
+
+        <div class="works__grid">
+
+          <!-- 作品カード：1枚目〜6枚目 ※ダミー画像を使用
+               クリックすると、下にあるポップアップ（同じidの.lightbox）が開きます -->
+          <a href="#work-01" class="work-card">
+            <div class="work-card__frame">
+              <img src="images/work01.png" alt="一緒に、寝る？" loading="lazy">
+            </div>
+            <p class="work-card__caption">オリジナル<span>2026.6</span></p>
+          </a>
+
+          <a href="#work-02" class="work-card">
+            <div class="work-card__frame">
+              <img src="images/work02.jpg" alt="Pink" loading="lazy">
+            </div>
+            <p class="work-card__caption">オリジナル<span>2026.6</span></p>
+          </a>
+
+          <a href="#work-03" class="work-card">
+            <div class="work-card__frame">
+              <img src="https://via.placeholder.com/600x400" alt="作品タイトル 03" loading="lazy">
+            </div>
+            <p class="work-card__caption">Neon Rain<span>2023</span></p>
+          </a>
+
+          <a href="#work-04" class="work-card">
+            <div class="work-card__frame">
+              <img src="https://via.placeholder.com/600x400" alt="作品タイトル 04" loading="lazy">
+            </div>
+            <p class="work-card__caption">Still Life<span>2023</span></p>
+          </a>
+
+          <a href="#work-05" class="work-card">
+            <div class="work-card__frame">
+              <img src="https://via.placeholder.com/600x400" alt="作品タイトル 05" loading="lazy">
+            </div>
+            <p class="work-card__caption">Blue Hour<span>2023</span></p>
+          </a>
+
+          <a href="#work-06" class="work-card">
+            <div class="work-card__frame">
+              <img src="https://via.placeholder.com/600x400" alt="作品タイトル 06" loading="lazy">
+            </div>
+            <p class="work-card__caption">Echo<span>2022</span></p>
+          </a>
+
+        </div>
+
+        <!-- ============================================
+             作品ポップアップ（ライトボックス）
+             JS不使用／URLの#idと:targetを利用したCSSのみの実装
+             背景の暗幕クリック、または×ボタンで閉じられます
+        ============================================= -->
+        <div id="work-01" class="lightbox">
+          <a href="#works" class="lightbox__overlay" aria-label="閉じる"></a>
+          <div class="lightbox__body">
+            <a href="#works" class="lightbox__close" aria-label="閉じる">×</a>
+            <img src="images/work01.png" alt="Quiet Morning の拡大画像" class="lightbox__image">
+            <p class="lightbox__caption">一緒に、寝る？<span>2026.6</span></p>
+          </div>
+        </div>
+
+        <div id="work-02" class="lightbox">
+          <a href="#works" class="lightbox__overlay" aria-label="閉じる"></a>
+          <div class="lightbox__body">
+            <a href="#works" class="lightbox__close" aria-label="閉じる">×</a>
+            <img src="images/work02.jpg" alt="Paper Boat の拡大画像" class="lightbox__image">
+            <p class="lightbox__caption">Pink<span>2026.6</span></p>
+          </div>
+        </div>
+
+        <div id="work-03" class="lightbox">
+          <a href="#works" class="lightbox__overlay" aria-label="閉じる"></a>
+          <div class="lightbox__body">
+            <a href="#works" class="lightbox__close" aria-label="閉じる">×</a>
+            <img src="https://via.placeholder.com/1200x800" alt="Neon Rain の拡大画像" class="lightbox__image">
+            <p class="lightbox__caption">Neon Rain<span>2023</span></p>
+          </div>
+        </div>
+
+        <div id="work-04" class="lightbox">
+          <a href="#works" class="lightbox__overlay" aria-label="閉じる"></a>
+          <div class="lightbox__body">
+            <a href="#works" class="lightbox__close" aria-label="閉じる">×</a>
+            <img src="https://via.placeholder.com/1200x800" alt="Still Life の拡大画像" class="lightbox__image">
+            <p class="lightbox__caption">Still Life<span>2023</span></p>
+          </div>
+        </div>
+
+        <div id="work-05" class="lightbox">
+          <a href="#works" class="lightbox__overlay" aria-label="閉じる"></a>
+          <div class="lightbox__body">
+            <a href="#works" class="lightbox__close" aria-label="閉じる">×</a>
+            <img src="https://via.placeholder.com/1200x800" alt="Blue Hour の拡大画像" class="lightbox__image">
+            <p class="lightbox__caption">Blue Hour<span>2023</span></p>
+          </div>
+        </div>
+
+        <div id="work-06" class="lightbox">
+          <a href="#works" class="lightbox__overlay" aria-label="閉じる"></a>
+          <div class="lightbox__body">
+            <a href="#works" class="lightbox__close" aria-label="閉じる">×</a>
+            <img src="https://via.placeholder.com/1200x800" alt="Echo の拡大画像" class="lightbox__image">
+            <p class="lightbox__caption">Echo<span>2022</span></p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         About：プロフィール
+    ============================================= -->
+    <section id="about" class="about">
+      <div class="section-inner about__inner">
+
+        <div class="about__photo-wrap">
+          <img class="about__photo" src="images/アイコン.jpg" alt="彩葉つづるのプロフィール写真">
+        </div>
+
+        <div class="about__body">
+          <h2 class="section-title">
+            <span class="section-title__en">About</span><span class="section-title__jp">プロフィール</span>
+          </h2>
+          <p class="about__name">彩葉 つづる <span class="about__name-en">Tsuzuru Iroha</span></p>
+          <p class="about__text">
+            イラストレーター。福岡在住。<br>
+            ポップで目を惹くデザインや色使いが得意です。<br>
+            Vライバー様のグッズやYouTubeスタンプ、IRIAM返礼品用イラストなど、<br>
+            配信活動に彩りを添えるお手伝いをしています。
+          </p>
+
+          <ul class="about__sns">
+            <li>
+              <a href="https://x.com/irohatsuzuru" class="about__sns-link" aria-label="X（旧Twitter）">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path fill="currentColor" d="M18.9 2H22l-7.6 8.7L23.3 22h-7.1l-5.6-6.9L4 22H1l8.1-9.3L0.9 2H8l5 6.3L18.9 2zm-1.2 18h2L6.4 4H4.3l13.4 16z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/irohatsuzuru/" class="about__sns-link" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2 .25 2.4.42.6.24 1 .53 1.5 1.02.48.48.77.9 1 1.5.17.4.36 1.2.42 2.4.07 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 2-.42 2.4-.24.6-.53 1-1.02 1.5-.48.48-.9.77-1.5 1-.4.17-1.2.36-2.4.42-1.3.07-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-2-.25-2.4-.42-.6-.24-1-.53-1.5-1.02-.48-.48-.77-.9-1-1.5-.17-.4-.36-1.2-.42-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-2 .42-2.4.24-.6.53-1 1.02-1.5.48-.48.9-.77 1.5-1 .4-.17 1.2-.36 2.4-.42C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.52 0-4.76.07-1.02.05-1.58.22-1.95.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.93-.36 1.95C2.87 8.5 2.87 8.87 2.87 12s0 3.5.07 4.76c.05 1.02.22 1.58.36 1.95.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.93.31 1.95.36 1.24.06 1.6.07 4.76.07s3.52 0 4.76-.07c1.02-.05 1.58-.22 1.95-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.93.36-1.95.06-1.24.07-1.6.07-4.76s0-3.5-.07-4.76c-.05-1.02-.22-1.58-.36-1.95-.19-.49-.42-.84-.79-1.2-.36-.37-.71-.6-1.2-.79-.37-.14-.93-.31-1.95-.36C15.5 4 15.15 4 12 4zm0 3.4a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 1.8a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6zm4.85-2.9a1.08 1.08 0 1 1 0 2.15 1.08 1.08 0 0 1 0-2.15z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         Contact：お問い合わせフォーム
+    ============================================= -->
+    <section id="contact" class="contact">
+      <div class="section-inner contact__inner">
+        <h2 class="section-title">
+          <span class="section-title__en">Contact</span><span class="section-title__jp">お問い合わせ</span>
+        </h2>
+        <p class="contact__lead">
+          お仕事のご依頼・ご相談は、下記フォームまたはメールにてお気軽にご連絡ください。
+        </p>
+
+        <!-- ============================================
+             価格目安（JS不使用／チェックボックスでの開閉）
+             「＋ 価格目安」ボタンをクリックすると価格表が開閉する
+        ============================================= -->
+        <div class="price-toggle">
+          <input type="checkbox" id="priceToggle" class="price-toggle__checkbox">
+          <label for="priceToggle" class="price-toggle__button">
+            <span class="price-toggle__icon" aria-hidden="true"></span>
+            価格目安
+          </label>
+
+          <div class="price-table">
+            <div class="price-table__inner">
+
+              <!-- 価格項目：ミニキャラ -->
+              <div class="price-item">
+                <div class="price-item__head">
+                  <p class="price-item__name">ミニキャラ</p>
+                  <p class="price-item__price">¥10,000<span>〜</span></p>
+                </div>
+                <p class="price-item__note">2〜3等身のミニキャラをご依頼いただけます。<br>
+                    商用・二次利用可能です。</p>
+                <ul class="price-item__list">
+                  <li>差分1点（表情・小物など）につき＋1,000円</li>
+                  <li>修正2回まで無料。以降1回につき＋1,000円</li>
+                  <li>納期はご依頼内容により3〜10日が目安です。</li>
+                </ul>
+              </div>
+
+              <!-- 価格項目：立ち絵 -->
+              <div class="price-item">
+                <div class="price-item__head">
+                  <p class="price-item__name">立ち絵</p>
+                  <p class="price-item__price">¥15,000<span>〜</span></p>
+                </div>
+                <p class="price-item__note">IRIAMやTRPGに適した立ち絵をご依頼いただけます。<br>
+                商用・二次利用可能です。</p>
+                <ul class="price-item__list">
+                  <li>差分1点（表情・小物など）につき＋1,000円</li>
+                  <li>修正2回まで無料。以降1回につき＋1,000円</li>
+                  <li>衣装や小物が複雑な場合は追加料金が発生します</li>
+                  <li>納期はご依頼内容により1〜2週間が目安です。</li>
+                </ul>
+              </div>
+
+              <!-- 価格項目：配信用/MV/1枚イラスト -->
+              <div class="price-item">
+                <div class="price-item__head">
+                  <p class="price-item__name">配信用 / MV / 1枚イラスト</p>
+                  <p class="price-item__price">¥25,000<span>〜</span></p>
+                </div>
+                <p class="price-item__note">背景まで含めた、1枚で完成させるイラストです。<br>
+                商用・二次利用可能です。</p>
+                <ul class="price-item__list">
+                  <li>差分1点（表情・小物など）につき＋3,000円</li>
+                  <li>修正2回まで無料。以降1回につき＋2,000円</li>
+                  <li>背景の作り込み具合により料金が変動します</li>
+                  <li>納期はご依頼内容により2〜4週間が目安です。</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================
+             フォーム送信の仕組みについて
+             サーバーサイドやJSを持たない静的サイトのため、
+             メール送信には無料のフォーム転送サービス「FormSubmit」を利用しています。
+             action は https://formsubmit.co/送信先アドレス という形式です。
+             ※初回送信時のみ、送信先アドレス(irohatsuzuru@gmail.com)宛に
+               「本当にこのフォームを許可しますか？」という確認メールが届くので、
+               そこで確認していただくと以降は自動で送信されるようになります。
+             ※ _next の値は、実際に公開するサイトのURL＋"#thanks" に書き換えてください
+               （例：https://your-domain.com/#thanks）。送信完了後にそのURLへ戻り、
+               下にある「お問い合わせありがとうございました」ポップアップが自動的に開きます。
+        ============================================= -->
+        <form class="contact__form" action="https://formsubmit.co/irohatsuzuru@gmail.com" method="post">
+          <!-- メール件名を指定 -->
+          <input type="hidden" name="_subject" value="【ポートフォリオサイト】お問い合わせがありました">
+          <!-- 送信完了後に戻ってくるURL（要：実際の公開URLに書き換え） -->
+          <input type="hidden" name="_next" value="#thanks">
+          <!-- reCAPTCHAの確認画面を省略する場合はtrueのままでOK -->
+          <input type="hidden" name="_captcha" value="false">
+ 
+          <div class="contact__field">
+            <label for="name" class="contact__label">お名前</label>
+            <input type="text" id="name" name="name" class="contact__input" placeholder="山田 太郎" required>
+          </div>
+ 
+          <div class="contact__field">
+            <label for="email" class="contact__label">メールアドレス</label>
+            <input type="email" id="email" name="email" class="contact__input" placeholder="you@example.com" required>
+          </div>
+ 
+          <div class="contact__field">
+            <label for="message" class="contact__label">メッセージ</label>
+            <textarea id="message" name="message" class="contact__textarea" rows="5" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+          </div>
+ 
+          <button type="submit" class="contact__submit">送信する</button>
+        </form>
+
+        <p class="contact__direct">
+          または、直接メールでどうぞ：
+          <a href="mailto:irohatsuzuru@gmail.com" class="contact__mail-link">irohatsuzuru@gmail.com</a>
+        </p>
+      </div>
+  <!-- ============================================
+           送信完了ポップアップ（サンクスメッセージ）
+           作品ポップアップと同じ:targetの仕組みを利用
+           URLが「#thanks」になった時だけ表示される
+      ============================================= -->
+      <div id="thanks" class="lightbox">
+        <a href="#contact" class="lightbox__overlay" aria-label="閉じる"></a>
+        <div class="lightbox__body lightbox__body--message">
+          <a href="#contact" class="lightbox__close" aria-label="閉じる">×</a>
+          <p class="lightbox__thanks-title">Thank You</p>
+          <p class="lightbox__thanks-text">
+            お問い合わせありがとうございました。<br>
+            内容を確認の上、改めてご連絡いたします。
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       フッター
+  ============================================= -->
+  <footer class="footer">
+    <p>&copy; 2026 Tsuzuru Iroha. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

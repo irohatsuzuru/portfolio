@@ -1,0 +1,1020 @@
+/* ==================================================================
+   Rin Aoyama Portfolio — style.css
+   コンセプト：線の細い、繊細で透明感のある世界観
+   ================================================================== */
+
+/* ---------- 共通変数（カラー・フォント・余白などをここで一括管理） ---------- */
+:root {
+  /* カラー */
+  --color-bg: #faf8f5;         /* 少しクリームがかった白 */
+  --color-text: #222222;       /* 深いチャコール */
+  --color-accent: #00b8ff;     /* ビビッドなネオンブルー */
+  --color-line: #ddd7cd;       /* 罫線・境界線用の淡い色 */
+  --color-line-soft: #eae5dc;  /* さらに薄い罫線 */
+  --color-muted: #8a857c;      /* 補足テキスト用のグレイッシュな色 */
+
+  /* フォント */
+  --font-display: 'Cormorant Garamond', serif; /* 英字見出し用・細く優雅 */
+  --font-body: 'Noto Sans JP', sans-serif;      /* 日本語本文用 */
+
+  /* レイアウト */
+  --max-width: 1200px;
+  --header-height: 76px;
+}
+
+/* ---------- リセット & 基本設定 ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height); /* 固定ヘッダー分ずらしてスクロール */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+/* キーボード操作時のフォーカスを明示（アクセシビリティ配慮） */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ==================================================================
+   背景：かすかに動く幾何学模様パターン
+   ドット・クロス・波線・円などのMemphisスタイルの図形を
+   タイル状に敷き詰め、上から下へゆっくり流れ続ける
+   ================================================================== */
+.bg-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.75; /* 単色・細線構成なので、やや控えめな主張に留める */
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  background-position: 0 0;
+  /* 円・クロス・波線・ピル型・菱形・ドット群を、それぞれ離して配置し「抜け感」を出す
+     色はすべて #ddd7cd に統一し、塗りではなく線を主体にすることで上品な印象に */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Ccircle cx='60' cy='50' r='5' fill='%23ddd7cd' fill-opacity='0.7'/%3E%3Ccircle cx='340' cy='120' r='14' fill='none' stroke='%23ddd7cd' stroke-width='1' stroke-dasharray='3 5'/%3E%3Cg stroke='%23ddd7cd' stroke-width='1.3' stroke-linecap='round'%3E%3Cline x1='200' y1='30' x2='200' y2='54'/%3E%3Cline x1='188' y1='42' x2='212' y2='42'/%3E%3C/g%3E%3Cpath d='M14 210 Q30 194 46 210 T78 210' stroke='%23ddd7cd' stroke-width='1.1' fill='none' stroke-linecap='round'/%3E%3Crect x='276' y='244' width='52' height='15' rx='7.5' fill='none' stroke='%23ddd7cd' stroke-width='1' transform='rotate(-18 302 251)'/%3E%3Crect x='110' y='312' width='17' height='17' fill='none' stroke='%23ddd7cd' stroke-width='1.1' transform='rotate(45 118 320)'/%3E%3Cg fill='%23ddd7cd' fill-opacity='0.6'%3E%3Ccircle cx='250' cy='350' r='2'/%3E%3Ccircle cx='264' cy='350' r='2'/%3E%3Ccircle cx='278' cy='350' r='2'/%3E%3Ccircle cx='250' cy='364' r='2'/%3E%3Ccircle cx='264' cy='364' r='2'/%3E%3Ccircle cx='278' cy='364' r='2'/%3E%3C/g%3E%3Ccircle cx='360' cy='300' r='9' fill='none' stroke='%23ddd7cd' stroke-width='1'/%3E%3C/svg%3E");
+  /* 上から下へ、タイル1枚分の高さ(400px)を1ループにしてシームレスに流す */
+  animation: patternFall 55s linear infinite;
+}
+
+@keyframes patternFall {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 400px;
+  }
+}
+
+/* ==================================================================
+   ヘッダー（スクロールしても上部に固定）
+   ================================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: rgba(250, 248, 245, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-line-soft);
+  z-index: 100;
+}
+
+.header__inner {
+  max-width: var(--max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.header__logo-dot {
+  color: var(--color-accent);
+}
+
+.header__nav {
+  display: flex;
+  gap: 40px;
+}
+
+.header__nav-link {
+  position: relative;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  padding-bottom: 4px;
+}
+
+/* ナビリンクの下線が伸びるホバーエフェクト */
+.header__nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.header__nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ==================================================================
+   メインビジュアル（ヒーローセクション）
+   右カラムのイラストを画面の右端いっぱいまで敷き詰める
+   フルブリード（container幅にとらわれない）レイアウト
+   ================================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--header-height);
+  overflow: hidden; /* イラストのフェードイン時のはみ出しを防ぐ */
+}
+
+/* 左カラム：テキストのみをコンテナ幅の中に収める */
+.hero__text-col {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.hero__text {
+  max-width: 480px; /* 右半分のイラストと重ならないよう幅を制限 */
+}
+
+.hero__eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+}
+
+.hero__title {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+  margin-bottom: 28px;
+}
+
+.hero__lead {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+/* キャッチコピー横の細い罫線アクセント */
+.hero__title {
+  border-left: 1px solid var(--color-accent);
+  padding-left: 24px;
+}
+
+.hero__cta {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-text);
+  transition: color 0.3s ease, border-color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.hero__cta:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  letter-spacing: 0.12em;
+}
+
+/* 右カラム：ヒーローエリアの右半分いっぱいに、画面端まで敷き詰める */
+.hero__visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 1;
+}
+
+.hero__illustration {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 縦横比を保ったまま余白なく敷き詰める */
+  /* 表示開始時は下に少し沈めて透明にしておく */
+  opacity: 0;
+  transform: translateY(48px);
+  animation: fadeUpIn 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.2s;
+}
+
+/* 下からふわっと浮き上がりながらフェードインする */
+@keyframes fadeUpIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* スクロール誘導の矢印代わりの縦線 */
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 25%; /* 左カラム（テキスト側）の中央付近に配置 */
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.hero__scroll-line {
+  display: block;
+  width: 1px;
+  height: 50px;
+  background-color: var(--color-line);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: var(--color-accent);
+  animation: scrollLineMove 2s ease-in-out infinite;
+}
+
+@keyframes scrollLineMove {
+  0% { top: -50%; }
+  100% { top: 100%; }
+}
+
+/* ==================================================================
+   セクション共通のレイアウト
+   ================================================================== */
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 120px 32px;
+}
+
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 64px;
+}
+
+.section-title__en {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 2.6rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.section-title__jp {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--color-muted);
+}
+
+/* ==================================================================
+   Works（作品一覧）セクション
+   ================================================================== */
+.works {
+  border-top: 1px solid var(--color-line-soft);
+}
+
+.works__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* PCでは3列 */
+  gap: 48px 32px;
+}
+
+.work-card {
+  display: block;
+}
+
+/* 画像を囲むフレーム。ホバー時にネオン風の枠線が光る */
+.work-card__frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.work-card__frame img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  /* デフォルトはモノクロ表示 */
+  filter: grayscale(100%) contrast(1.02);
+  transform: scale(1);
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+/* 【ユニークな仕掛け】ホバー時：
+   ①モノクロ→カラーに変化
+   ②画像が少し拡大
+   ③枠線がネオンピンクで光る（グロー効果） */
+.work-card:hover .work-card__frame img {
+  filter: grayscale(0%) contrast(1.05);
+  transform: scale(1.06);
+}
+
+.work-card:hover .work-card__frame {
+  border-color: var(--color-accent);
+  box-shadow:
+    0 0 0 1px var(--color-accent),
+    0 0 16px 2px rgba(0, 184, 255, 0.55),
+    0 0 40px 6px rgba(0, 184, 255, 0.25);
+}
+
+.work-card__caption {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+}
+
+.work-card__caption span {
+  color: var(--color-muted);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+/* ==================================================================
+   作品ポップアップ（ライトボックス）
+   URLフラグメント（#work-01 など）と :target 疑似クラスだけで
+   開閉を実現しているため、JavaScriptは使用していません
+   ================================================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease;
+}
+
+/* URLのハッシュがこの要素のidと一致した時だけ表示する */
+.lightbox:target {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 背景の暗幕。クリックすると閉じる（#worksへ戻るリンク） */
+.lightbox__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(34, 34, 34, 0.85);
+  cursor: zoom-out;
+}
+
+.lightbox__body {
+  position: relative;
+  z-index: 1;
+  max-width: min(90vw, 1000px);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.96);
+  transition: transform 0.35s ease;
+}
+
+.lightbox:target .lightbox__body {
+  transform: scale(1);
+}
+
+.lightbox__image {
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: #fff;
+}
+
+.lightbox__caption {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.lightbox__caption span {
+  margin-left: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+/* 閉じるボタン（×） */
+.lightbox__close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.lightbox__close:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: rotate(90deg);
+}
+
+/* 送信完了ポップアップ（お問い合わせフォーム用）：作品ポップアップと共通の.lightboxを流用し、
+   カード状の白いパネルで簡潔なメッセージを表示するバリエーション */
+.lightbox__body--message {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-line);
+  padding: 56px 48px;
+  text-align: center;
+  max-width: 420px;
+}
+
+.lightbox__thanks-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+.lightbox__thanks-text {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.9;
+}
+
+/* メッセージ用ポップアップは背景が明るいため、×ボタンの配色を反転 */
+.lightbox__body--message .lightbox__close {
+  border-color: var(--color-line);
+  color: var(--color-text);
+}
+
+.lightbox__body--message .lightbox__close:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ==================================================================
+   About（プロフィール）セクション
+   ================================================================== */
+.about {
+  border-top: 1px solid var(--color-line-soft);
+  background-color: #fffdfb;
+}
+
+.about__inner {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.about__photo-wrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* 細いピンクのリングを写真から少し離して配置 */
+  outline: 1px solid var(--color-accent);
+  outline-offset: 10px;
+}
+
+.about__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about__name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.about__name-en {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-muted);
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
+.about__text {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+
+.about__sns {
+  display: flex;
+  gap: 20px;
+}
+
+.about__sns-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.about__sns-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+/* ==================================================================
+   Contact（お問い合わせ）セクション
+   ================================================================== */
+.contact {
+  border-top: 1px solid var(--color-line-soft);
+}
+
+.contact__inner {
+  max-width: 640px;
+}
+
+.contact__lead {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-bottom: 32px;
+}
+
+/* ==================================================================
+   価格目安（＋ボタンで開閉する価格表）
+   JSは使わず、チェックボックス＋ラベルの仕組みで開閉を実現
+   ================================================================== */
+.price-toggle {
+  margin-bottom: 48px;
+}
+
+/* 実際のチェックボックスは非表示にしつつ、キーボード操作は可能な状態を維持 */
+.price-toggle__checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ＋ 価格目安 ボタン */
+.price-toggle__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px 10px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.price-toggle__button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* チェックボックスにフォーカスがある間も、ボタンにフォーカスリングを表示 */
+.price-toggle__checkbox:focus-visible ~ .price-toggle__button {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ＋ アイコン（丸枠の中に十字線） */
+.price-toggle__icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform 0.35s ease;
+}
+
+.price-toggle__icon::before,
+.price-toggle__icon::after {
+  content: '';
+  position: absolute;
+  background-color: currentColor;
+}
+
+.price-toggle__icon::before {
+  top: 50%;
+  left: 25%;
+  width: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.price-toggle__icon::after {
+  left: 50%;
+  top: 25%;
+  width: 1px;
+  height: 50%;
+  transform: translateX(-50%);
+}
+
+/* 開いているときは＋を回転させて×に見せる／文字色をアクセントに */
+.price-toggle__checkbox:checked ~ .price-toggle__button {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.price-toggle__checkbox:checked ~ .price-toggle__button .price-toggle__icon {
+  transform: rotate(45deg);
+}
+
+/* 価格表本体：開閉アニメーション（max-heightで滑らかに展開） */
+.price-table {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.6s ease, opacity 0.4s ease;
+}
+
+.price-toggle__checkbox:checked ~ .price-table {
+  max-height: 1400px;
+  opacity: 1;
+}
+
+.price-table__inner {
+  margin-top: 32px;
+  border-top: 1px solid var(--color-line-soft);
+}
+
+/* 価格項目1件分（ミニキャラ／立ち絵／配信用 etc.） */
+.price-item {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.price-item__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.price-item__name {
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.price-item__price {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.price-item__price span {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-left: 2px;
+}
+
+.price-item__note {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  margin-bottom: 16px;
+}
+
+/* 注意事項の箇条書き（丸にチェックが入ったマーカー） */
+.price-item__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.price-item__list li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+.price-item__list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  color: var(--color-accent);
+  font-size: 9px;
+  line-height: 14px;
+  text-align: center;
+}
+
+.contact__field {
+  margin-bottom: 28px;
+}
+
+.contact__label {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin-bottom: 10px;
+}
+
+.contact__input,
+.contact__textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--color-line);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  padding: 10px 2px;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+.contact__input::placeholder,
+.contact__textarea::placeholder {
+  color: #bcb6ab;
+}
+
+.contact__input:focus,
+.contact__textarea:focus {
+  border-color: var(--color-accent);
+}
+
+.contact__submit {
+  margin-top: 12px;
+  padding: 14px 40px;
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  border: 1px solid var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.contact__submit:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.contact__direct {
+  margin-top: 40px;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.contact__mail-link {
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-line);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.contact__mail-link:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ==================================================================
+   フッター
+   ================================================================== */
+.footer {
+  text-align: center;
+  padding: 40px 32px;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-line-soft);
+}
+
+/* ==================================================================
+   レスポンシブ対応
+   ================================================================== */
+
+/* ---- タブレットサイズ（〜1024px）：Worksを2列に、Aboutの余白を調整 ---- */
+@media (max-width: 1024px) {
+  .works__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about__inner {
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+  }
+}
+
+/* ---- スマホ〜小型タブレット（〜768px）：主要レイアウトを1カラム化 ---- */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .header__inner {
+    padding: 0 20px;
+  }
+
+  .header__logo {
+    font-size: 1.2rem;
+  }
+
+  .header__nav {
+    gap: 20px;
+  }
+
+  .header__nav-link {
+    font-size: 0.75rem;
+  }
+
+  /* ヒーローを縦積みに。イラストを先に見せず、テキストを優先 */
+  .hero {
+    flex-direction: column;
+    padding-top: calc(var(--header-height) + 24px);
+  }
+
+  .hero__visual {
+    position: relative; /* フルブリードの絶対配置を解除し、通常の流れに戻す */
+    inset: auto;
+    width: 100%;
+    height: 320px;
+    order: -1;
+  }
+
+  .hero__text-col {
+    padding: 32px 20px 60px;
+  }
+
+  .hero__text {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .hero__title {
+    font-size: 1.7rem;
+    padding-left: 16px;
+  }
+
+  .hero__scroll-hint {
+    left: 50%;
+  }
+
+  .section-inner {
+    padding: 80px 20px;
+  }
+
+  .section-title__en {
+    font-size: 2rem;
+  }
+
+  /* Worksをスマホでは1列に */
+  .works__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* Aboutを縦積みに、写真を中央寄せ */
+  .about__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about__photo-wrap {
+    margin: 0 auto;
+  }
+
+  .about__sns {
+    justify-content: center;
+  }
+
+  .about__text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 価格項目：スマホでは項目名と金額を縦積みにして窮屈さを解消 */
+  .price-item__head {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .price-item__price {
+    font-size: 1.3rem;
+  }
+}
+
+/* ---- reduced motion環境への配慮：アニメーションを最小限に ---- */
+@media (prefers-reduced-motion: reduce) {
+  .bg-pattern,
+  .hero__illustration,
+  .hero__scroll-line::after {
+    animation: none;
+  }
+  .hero__illustration {
+    opacity: 1;
+    transform: none;
+  }
+}
