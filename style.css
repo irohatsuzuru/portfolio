@@ -207,7 +207,7 @@ textarea:focus-visible {
 .hero__title {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4vw, 3.0rem);
   line-height: 1.6;
   letter-spacing: 0.03em;
   margin-bottom: 28px;
